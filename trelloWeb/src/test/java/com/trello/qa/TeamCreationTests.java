@@ -19,6 +19,6 @@ public class TeamCreationTests extends TestBase {
         return driver.findElements(locator).size() > 0;
 
     }
-//checin
+
 
 }
