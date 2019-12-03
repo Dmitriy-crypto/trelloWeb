@@ -63,4 +63,12 @@ public class TestBase {
         driver.quit();
     }
 
+    public boolean isUserLoggedIn() {
+        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
+    }
+
+    private boolean isElementPresent(By locator) {
+        return driver.findElements(locator).size() > 0;
+
+    }
 }
