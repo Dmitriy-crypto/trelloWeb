@@ -15,6 +15,9 @@ public class TestBase {
     public static String url = "https://trello.com/";
     public static String email = "elena.telran@yahoo.com";
     public static String password = "12345.com";
+    //public static String email = "dmitriy.stadnikov@yahoo.com";
+
+    //public static String password = "75dmitriy.13Eva";
 
     @BeforeMethod
     public void setUp() {
