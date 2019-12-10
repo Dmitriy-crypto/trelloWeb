@@ -16,12 +16,12 @@ public class TestBase {
     public static String url = "https://trello.com/";
 
     //-------------------login ahd password-----------------------------
-    public static String email = "elena.telran@yahoo.com";
-    public static String password = "12345.com";
+//    public static String email = "elena.telran@yahoo.com";
+//    public static String password = "12345.com";
 
 
-    //public static String email = "dmitriy.stadnikov@yahoo.com";
-    //public static String password = "75dmitriy.13Eva";
+    public static String email = "dmitriy.stadnikov@yahoo.com";
+    public static String password = "75Dmitriy.2013Eva";
 
     //------------------Variables for teams fill----------------------------------------
     public String teamName = "test_can_be_deleted";
@@ -29,11 +29,14 @@ public class TestBase {
 
     //----------------------------Variables for boards fill------------------------------------------------------
     public String boardName = "board off test, can_be_deleted";
+    public int s = 1;
+    public int s1 = 0;
+    int size;
 
     //-------------------End variables-------------------------------------------
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp() throws InterruptedException {
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -52,8 +55,8 @@ public class TestBase {
         driver.quit();
     }
 
-    public boolean isUserLoggedIn() {
-        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
+    public boolean isUserLoggedIn(By locator) {
+        return isElementPresent(locator);
     }
 
     public boolean isElementPresent(By locator) {
@@ -61,13 +64,27 @@ public class TestBase {
 
     }
 
+    public int sizeList(By locator) {
+        size = driver.findElements(locator).size();
+        return size;
+
+
+    }
+
     //------------------Methods---------------------------------------------------
 
-    public void logInToTrello(String email, String password) {
+    public void logInToTrello(String email, String password) throws InterruptedException {
         clickOnWebElement(By.cssSelector("[href='/login']"));
         typeTextInTheField(By.cssSelector("[type=email]"), email);
-        typeTextInTheField(By.cssSelector("[type=password]"), password);
+//        typeTextInTheField(By.cssSelector("[type=password]"), password);
         clickOnWebElement(By.id("login"));
+        Thread.sleep(3000);
+        clickOnWebElement(By.id("login-submit"));
+        Thread.sleep(3000);
+        typeTextInTheField(By.id("password"), password);
+        Thread.sleep(3000);
+        clickOnWebElement(By.id("login-submit"));
+
     }
 
     public void clickOnWebElement(By locator) {
@@ -93,8 +110,8 @@ public class TestBase {
         typeTextInTheField(By.cssSelector("textarea"), description);
     }
 
-    public void selectCreateTeamFromDropDon() {
-        clickOnWebElement(By.cssSelector("[data-test-id='header-create-team-button']"));
+    public void selectCreateTeamFromDropDon(By locator) {
+        driver.findElement(locator).click();
 
     }
 
@@ -120,5 +137,8 @@ public class TestBase {
 
     public void confirmBoardCreation() {
         clickOnWebElement(By.cssSelector("[data-test-id='create-board-submit-button']"));
+    }
+
+    private void findElement(By locator) {
     }
 }
