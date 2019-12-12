@@ -139,6 +139,6 @@ public class TestBase {
         clickOnWebElement(By.cssSelector("[data-test-id='create-board-submit-button']"));
     }
 
-    private void findElement(By locator) {
+    void findElement(By locator) {
     }
 }

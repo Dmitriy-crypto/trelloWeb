@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class deleteBord extends TestBase {
+public class DeleteBord extends TestBase {
 
 
     @Test()
@@ -26,7 +26,8 @@ public class deleteBord extends TestBase {
             //clickOnWebElement(By.xpath("//div[@class='all-boards']//div[2]//ul[1]//li[1]"));
             clickOnWebElement(By.xpath("//*[@class='boards-page-board-section-list']//li[1]"));
 
-            if (isElementPresent(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"))) {
+            //driver.findElement(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']")).isDisplayed();)
+            if (Visibl(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"))) {
                 clickOnWebElement(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"));
             }
 
@@ -52,5 +53,10 @@ public class deleteBord extends TestBase {
 
     }
 
+    public boolean Visibl(By locator) {
+
+        return driver.findElement(locator).isDisplayed();
+
+    }
 
 }

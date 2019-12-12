@@ -11,7 +11,8 @@ public class TeamCreationTests extends TestBase {
 
     @Test(enabled = true)
     public void testTeamCreationFromButtonOnHeader() throws InterruptedException {
-
+        int beforeCountTeams = getTeamsCount();
+        System.out.println(beforeCountTeams);
         clickOnWebElement(By.cssSelector("[data-test-id='header-create-menu-button']"));
         Thread.sleep(3000);
 
@@ -22,8 +23,16 @@ public class TeamCreationTests extends TestBase {
         clickContinueButton();
         Thread.sleep(3000);
         clickOnWebElement(By.xpath("//a[@class='eg0KI5SqghoOFd']"));
-        Assert.assertTrue(isUserLoggedIn(By.xpath("//a[@class='button-link tabbed-pane-header-details-edit js-edit-profile']")), "ass");
+//        return to home page
+        int afterCountTeams = getTeamsCount();
+        System.out.println(afterCountTeams);
+        Assert.assertEquals(afterCountTeams + 1, beforeCountTeams);
+        // Assert.assertTrue(isUserLoggedIn(By.xpath("//a[@class='button-link tabbed-pane-header-details-edit js-edit-profile']")), "ass");
 
+    }
+
+    public int getTeamsCount() {
+        return driver.findElements(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")).size();
     }
 
     @Test(enabled = false)
