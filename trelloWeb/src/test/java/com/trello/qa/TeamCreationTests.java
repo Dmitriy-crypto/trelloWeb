@@ -1,22 +1,20 @@
 package com.trello.qa;
 //one upload start project
 
-
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TeamCreationTests extends TestBase {
 
-
     @Test(enabled = true)
     public void testTeamCreationFromButtonOnHeader() throws InterruptedException {
+
         int beforeCountTeams = getTeamsCount();
         System.out.println(beforeCountTeams);
         clickOnWebElement(By.cssSelector("[data-test-id='header-create-menu-button']"));
         Thread.sleep(3000);
-
-        selectCreateTeamFromDropDon(By.cssSelector("[data-test-id='header-create-team-button']"));
+        selectCreateSomethingFromDropDown(By.cssSelector("[data-test-id='header-create-team-button']"));
         Thread.sleep(3000);
         fillTeamCreationForm(teamName, description);
         Thread.sleep(3000);
@@ -28,10 +26,10 @@ public class TeamCreationTests extends TestBase {
         System.out.println(afterCountTeams);
         Assert.assertEquals(afterCountTeams + 1, beforeCountTeams);
         // Assert.assertTrue(isUserLoggedIn(By.xpath("//a[@class='button-link tabbed-pane-header-details-edit js-edit-profile']")), "ass");
-
     }
 
     public int getTeamsCount() {
+
         return driver.findElements(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")).size();
     }
 
@@ -39,12 +37,10 @@ public class TeamCreationTests extends TestBase {
     public void testTeamCancelCreationFromButtonOnHeader() {
 
         clickOnPlusButtonOnHeader();
-        selectCreateTeamFromDropDon(By.cssSelector("[data-test-id='header-create-board-button']"));
+        selectCreateSomethingFromDropDown(By.cssSelector("[data-test-id='header-create-board-button']"));
         fillTeamCreationForm(teamName, description);
         clickXorCancel();
         //Assert.assertTrue(isUserLoggedIn(), "ass");
-
     }
-
 
 }
