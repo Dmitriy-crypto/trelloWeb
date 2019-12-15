@@ -26,7 +26,6 @@ public class TeamCreationTests extends TestBase {
         int afterCountTeams = getTeamsCount();
         System.out.println(afterCountTeams);
         Assert.assertEquals(afterCountTeams, beforeCountTeams + 1);
-
         // Assert.assertTrue(isUserLoggedIn(By.xpath("//a[@class='button-link tabbed-pane-header-details-edit js-edit-profile']")), "ass");
     }
 
