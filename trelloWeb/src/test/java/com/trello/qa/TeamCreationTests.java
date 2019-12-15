@@ -16,7 +16,7 @@ public class TeamCreationTests extends TestBase {
         selectCreateSomethingFromDropDown(By.cssSelector("[data-test-id='header-create-team-button']"));
         Thread.sleep(1000);
         fillTeamCreationForm(teamName, description);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         clickContinueButton();
         Thread.sleep(1000);
         clickOnWebElement(By.xpath("//a[@class='eg0KI5SqghoOFd']"));//click on the inscription "return to home page"
