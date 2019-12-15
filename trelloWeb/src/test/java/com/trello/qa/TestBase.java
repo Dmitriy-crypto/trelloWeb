@@ -5,14 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
     WebDriver driver;
+    WebDriverWait driverWait;
     //-------------------Variables-------------------------------------
     public static String url = "https://trello.com/";
 
@@ -24,13 +25,13 @@ public class TestBase {
     public static String password = "75Dmitriy.2013Eva";
 
     //------------------Variables for teams fill----------------------------------------
-    public String teamName = "test11";
+    public String teamName = "test11 - " + (int) System.currentTimeMillis();
 
     public String description = "descr Learn_delete_ok";
 
     //----------------------------Variables for boards fill------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------
-    public String boardName = "Board off test";// name board to creat
+    public String boardName = "Board off test - " + (int) System.currentTimeMillis();// name board to creat
 
     public String x = "23";
 
@@ -48,7 +49,8 @@ public class TestBase {
     int n; //board selection by position in "public void selectPersonalBoardByNumber"
 
     //-------------------End variables-------------------------------------------
-    @BeforeMethod
+
+    @BeforeClass
     public void setUp() throws InterruptedException {
 
         driver = new ChromeDriver();
@@ -56,29 +58,29 @@ public class TestBase {
         driver.manage().window().maximize();
         //driver.manage().window().fullscreen();
         openSite(url);
-        logInToTrello(email, password);
+        loginToTrello(email, password);
         Thread.sleep(2000);
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
 
         driver.quit();
     }
 
     //------------------Methods OPEN AND LOGIN SITE---------------------------------------------------
-    public void logInToTrello(String email, String password) throws InterruptedException {
+    public void loginToTrello(String email, String password) throws InterruptedException {
 
-        clickOnWebElement(By.cssSelector("[href='/login']"));
+        click(By.cssSelector("[href='/login']"));
         typeTextInTheFieldNameBoard(By.cssSelector("[type=email]"), email);
 //        typeTextInTheField(By.cssSelector("[type=password]"), password);
-        clickOnWebElement(By.id("login"));
+        click(By.id("login"));
         Thread.sleep(3000);
-        clickOnWebElement(By.id("login-submit"));
+        click(By.id("login-submit"));
         Thread.sleep(3000);
         typeTextInTheFieldNameBoard(By.id("password"), password);
         Thread.sleep(3000);
-        clickOnWebElement(By.id("login-submit"));
+        click(By.id("login-submit"));
     }
 
     public void openSite(String url) {
@@ -88,16 +90,16 @@ public class TestBase {
 
     public void clickContinueButton() {
 
-        clickOnWebElement(By.cssSelector("[type=submit]"));
+        click(By.cssSelector("[type=submit]"));
     }
 
-    public boolean isUserLoggedIn(By locator) {
+    public boolean isUserLoggedIn() {
 
-        return isElementPresent(locator);
+        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
     }
 
     //-----------------------------COMMON METHODS--------------------------------------
-    public void clickOnWebElement(By locator) {
+    public void click(By locator) {
 
         driver.findElement(locator).click();
     }
@@ -119,10 +121,10 @@ public class TestBase {
         if (isElementPresent(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV"))) {
             new WebDriverWait(driver, 15).until(ExpectedConditions.
                     stalenessOf(driver.findElement(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV"))));
-            clickOnWebElement(By.cssSelector("a[href='/']"));
-            clickOnWebElement(By.cssSelector("a[href='/']"));
+            click(By.cssSelector("a[href='/']"));
+            click(By.cssSelector("a[href='/']"));
         } else
-            clickOnWebElement(By.cssSelector("a[href='/']"));
+            click(By.cssSelector("a[href='/']"));
     }
 
     //------------------------COMMON METHODS FOR CREAT------------------------------------------
@@ -137,7 +139,7 @@ public class TestBase {
 
     public void selectCreateBoardFromDropDown() {
 
-        clickOnWebElement(By.cssSelector("[data-test-id='header-create-board-button']"));
+        click(By.cssSelector("[data-test-id='header-create-board-button']"));
     }
 
     void findElement(By locator) {
@@ -151,7 +153,7 @@ public class TestBase {
 
     public void clickButtonPlusUp() {
 
-        clickOnWebElement(By.cssSelector("[data-test-id='header-create-menu-button']"));
+        click(By.cssSelector("[data-test-id='header-create-menu-button']"));
     }
 
     //---------------------------------METHODS FOR TEAMS-----------------------------------------------
@@ -181,29 +183,29 @@ public class TestBase {
         typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id=\"create-board-title-input\"]"), boardName1);
         //----------------board type selection - with or without a team--------------------
         Thread.sleep(2000);
-        clickOnWebElement(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
+        click(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
         Thread.sleep(2000);
         if (no_team) {
 
-            clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[1]//button[1]"));
+            click(By.xpath("//div[@id='layer-manager-popover']//li[1]//button[1]"));
         } else
-            clickOnWebElement(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[2]//button[1]"));
+            click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[2]//button[1]"));
         Thread.sleep(1000);
-        clickOnWebElement(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
+        click(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
         if (privet_team) {
             Thread.sleep(1000);
-            clickOnWebElement(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
+            click(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
             //clickOnWebElement(By.cssSelector("//*[@class='_2BQG4yPMt5s_hu _3qi72H5bh1Hw2k _2BsMHO2GghWoia _3CXWmcvfj_w5yC _1Hfz_OCLW086D8']"));
             Thread.sleep(1000);
         } else {
             //clickOnWebElement(By.cssSelector("button.subtle-chooser-trigger.unstyled-button.vis-chooser-trigger > span.icon-sm.icon-down.subtle-chooser-trigger-dropdown-icon.light:nth-child(2)"));
-            clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
+            click(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
             //clickOnWebElement(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
             Thread.sleep(5000);
             //clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
             //clickOnWebElement(By.xpath("//span[@name='public']"));
             //clickOnWebElement(By.xpath("//body/div[@id='trello-root']/div[@id='chrome-container']/div[@class='js-react-root']/div[@id='layer-manager-popover']/div[@class='Y34HN84mGuwAaM _1-EJ9-6xaTaAf-']/div[@class='_3n2uNSrVwAmo1u']/nav[@class='_2R1DnMySK1mTDa']/ul/li[2]/button[1]/span[1]"));
-            clickOnWebElement(By.xpath("//div[@class='pop-over mod-no-header is-shown']//li[2]//a[1]//span[2]"));
+            click(By.xpath("//div[@class='pop-over mod-no-header is-shown']//li[2]//a[1]//span[2]"));
 
             Thread.sleep(12000);
             //clickOnWebElement(By.xpath("//button[@class='_3UeOvlU6B5KUnS _2MgouXHqRQDP_5 _3ZPeWh5QQj47DA']"));
@@ -217,9 +219,9 @@ public class TestBase {
         if (enable_background_random) {
             background_selection = (int) (Math.random() * 8 + 1);
         }
-        clickOnWebElement(By.xpath("//div[@id='layer-manager-overlay']//li[" + background_selection + "]"));
+        click(By.xpath("//div[@id='layer-manager-overlay']//li[" + background_selection + "]"));
         //-------------------------------create board------------------------------------
-        clickOnWebElement(By.cssSelector("[data-test-id='create-board-submit-button']"));
+        click(By.cssSelector("[data-test-id='create-board-submit-button']"));
         //-----------------------------------
         Thread.sleep(1000);
     }
@@ -240,33 +242,33 @@ public class TestBase {
             typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id=\"create-board-title-input\"]"), boardName1);
             //----------------board type selection - with or without a team--------------------
             Thread.sleep(2000);
-            clickOnWebElement(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
+            click(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
             Thread.sleep(2000);
             if (no_team) {
 
-                clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[1]//button[1]"));
+                click(By.xpath("//div[@id='layer-manager-popover']//li[1]//button[1]"));
             } else
-                clickOnWebElement(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[2]//button[1]"));
+                click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[2]//button[1]"));
             Thread.sleep(1000);
-            clickOnWebElement(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
+            click(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
             if (privet_team) {
                 Thread.sleep(1000);
-                clickOnWebElement(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
+                click(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
                 //clickOnWebElement(By.cssSelector("//*[@class='_2BQG4yPMt5s_hu _3qi72H5bh1Hw2k _2BsMHO2GghWoia _3CXWmcvfj_w5yC _1Hfz_OCLW086D8']"));
                 Thread.sleep(1000);
             } else {
-                clickOnWebElement(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
+                click(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
                 //clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
                 //clickOnWebElement(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
                 Thread.sleep(2000);
                 //clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
                 //clickOnWebElement(By.xpath("//span[@name='public']"));
                 //clickOnWebElement(By.xpath("//body/div[@id='trello-root']/div[@id='chrome-container']/div[@class='js-react-root']/div[@id='layer-manager-popover']/div[@class='Y34HN84mGuwAaM _1-EJ9-6xaTaAf-']/div[@class='_3n2uNSrVwAmo1u']/nav[@class='_2R1DnMySK1mTDa']/ul/li[2]/button[1]/span[1]"));
-                clickOnWebElement(By.cssSelector("//*[@name='public']/."));
+                click(By.cssSelector("//*[@name='public']/."));
 
                 Thread.sleep(2000);
                 //clickOnWebElement(By.xpath("//button[@class='_3UeOvlU6B5KUnS _2MgouXHqRQDP_5 _3ZPeWh5QQj47DA']"));
-                clickOnWebElement(By.cssSelector("//*[@class='X6LMWvod566P68']//button[1]"));
+                click(By.cssSelector("//*[@class='X6LMWvod566P68']//button[1]"));
 
             }
 //-------------------------------background--------------------------------------------------
@@ -274,9 +276,9 @@ public class TestBase {
             if (enable_background_random) {
                 background_selection = (int) (Math.random() * 8 + 1);
             }
-            clickOnWebElement(By.xpath("//div[@id='layer-manager-overlay']//li[" + background_selection + "]"));
+            click(By.xpath("//div[@id='layer-manager-overlay']//li[" + background_selection + "]"));
             //-------------------------------create board------------------------------------
-            clickOnWebElement(By.cssSelector("[data-test-id='create-board-submit-button']"));
+            click(By.cssSelector("[data-test-id='create-board-submit-button']"));
             //-----------------------------------
             Thread.sleep(1000);
         }
@@ -289,12 +291,12 @@ public class TestBase {
 
     public void selectFirstPersonalBoard() {
 
-        clickOnWebElement(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li"));
+        click(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li"));
     }
 
     public void selectPersonalBoardByNumber(int n) {
 
-        clickOnWebElement(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li[" + n + "]"));
+        click(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li[" + n + "]"));
     }
 
     //-----------------------------------------------------------------
@@ -316,34 +318,61 @@ public class TestBase {
 
         typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id='create-board-title-input']"), boardName);
         if (isElementPresent(By.cssSelector(".W6rMLOx8U0MrPx"))) {
-            clickOnWebElement(By.cssSelector(".W6rMLOx8U0MrPx"));
-            clickOnWebElement(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[1]"));//no team
+            click(By.cssSelector(".W6rMLOx8U0MrPx"));
+            click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[1]"));//no team
         }
     }
 
     public void deleteBoard() throws InterruptedException {
 
 
-        clickOnWebElement(By.xpath("//input[@class='js-confirm full negate']"));// button CLOSE additionally
+        click(By.xpath("//input[@class='js-confirm full negate']"));// button CLOSE additionally
         Thread.sleep(1000);
-        clickOnWebElement(By.xpath("//a[@class='quiet js-delete']"));//permanently delete
+        click(By.xpath("//a[@class='quiet js-delete']"));//permanently delete
         Thread.sleep(1000);
-        clickOnWebElement(By.xpath("//input[@class='js-confirm full negate']"));// button CLOSE additionally
+        click(By.xpath("//input[@class='js-confirm full negate']"));// button CLOSE additionally
         returnToHome();
     }
 
     public void closeTheBoard() {
 
         if (Visible(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"))) { //button MENU
-            clickOnWebElement(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"));
+            click(By.xpath("//a[@class='board-header-btn mod-show-menu js-show-sidebar']"));
         } else {
-            clickOnWebElement(By.xpath("//a[@class='board-menu-navigation-item-link js-open-more']"));// button MORE down
+            click(By.xpath("//a[@class='board-menu-navigation-item-link js-open-more']"));// button MORE down
         }
-        clickOnWebElement(By.xpath("//a[@class='board-menu-navigation-item-link js-close-board']"));// button close board down
+        click(By.xpath("//a[@class='board-menu-navigation-item-link js-close-board']"));// button close board down
     }
 
     protected String getTeamNameFromPage() {
 
+        new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1.u-inline")));
         return driver.findElement(By.cssSelector("h1.u-inline")).getText();
+    }
+
+    public boolean isPersonalBoards() {
+
+        return isElementPresent(By.xpath("//*[@class='icon-lg icon-member']/../../.."));
+    }
+
+    public void deleteTeam() {
+
+        new WebDriverWait(driver, 15).until(ExpectedConditions.
+                elementToBeClickable(By.cssSelector(".quiet-button")));
+        click(By.cssSelector(".quiet-button"));
+        click(By.cssSelector(".js-confirm"));
+
+    }
+
+    public void openSettings() {
+
+        click(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc"));
+
+    }
+
+    public void clickOnFirstTeam() {
+
+        click(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li"));
+
     }
 }

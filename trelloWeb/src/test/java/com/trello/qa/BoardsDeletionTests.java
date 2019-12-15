@@ -3,7 +3,7 @@ package com.trello.qa;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DeleteBoards extends TestBase {
+public class BoardsDeletionTests extends TestBase {
 
     @Test()
     public void deleteAllPersonalBoards() throws InterruptedException {
