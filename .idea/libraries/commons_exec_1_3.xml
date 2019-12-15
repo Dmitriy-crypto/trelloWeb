@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="commons-exec-1.3">
+    <CLASSES>
+      <root url="jar:///media/dmitriy/685E-DF7D/Install_for_Linux/QA_Tools/libs/commons-exec-1.3.jar!/" />
+      <root url="jar:///media/dmitriy/685E-DF7D/Install_for_Linux/QA_Tools/libs/guava-25.0-jre.jar!/" />
+      <root url="jar:///media/dmitriy/685E-DF7D/Install_for_Linux/QA_Tools/libs/okhttp-3.11.0.jar!/" />
+      <root url="jar:///media/dmitriy/685E-DF7D/Install_for_Linux/QA_Tools/libs/okio-1.14.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
