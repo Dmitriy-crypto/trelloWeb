@@ -7,14 +7,14 @@ public class BoardsCreationTest extends TestBase {
   @Test(enabled = true)
   public void testCreationBoardsFromHomePage() throws InterruptedException {
 
-      app.createBoards(app.numberBoards);
-      Assert.assertTrue(app.isElementPresent(By.xpath("//div[@class='board-header-btn mod-board-name inline-rename-board js-rename-board']")), "sdfsdf");
+      app.getBoardHelper().createBoards(app.numberBoards);
+      Assert.assertTrue(app.getBoardHelper().isElementPresent(By.xpath("//div[@class='board-header-btn mod-board-name inline-rename-board js-rename-board']")), "sdfsdf");
   }
 
   @Test
   public void testCreationBoardFromHomePage() throws InterruptedException {
 
-      app.createBoard();
+      app.getBoardHelper().createBoard();
   }
 }
 

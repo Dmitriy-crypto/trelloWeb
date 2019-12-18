@@ -7,11 +7,7 @@ public class TestBase {
 
     protected static ApplicationManager app = new ApplicationManager();
 
-    //-------------------login ahd password-----------------------------
-//    public static String email = "elena.telran@yahoo.com";
-//    public static String password = "12345.com";
 
-    //-------------------End variables-------------------------------------------
 
     @BeforeSuite
     public void setUp() throws InterruptedException {

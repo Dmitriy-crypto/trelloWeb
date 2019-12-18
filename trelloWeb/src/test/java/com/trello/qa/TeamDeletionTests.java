@@ -9,7 +9,7 @@ public class TeamDeletionTests extends TestBase {
     public void deleteTeamFromLeftNavMenu() throws InterruptedException {
 
         int i;//count delete boards
-        int before = app.getTeamsCount();
+        int before = app.getTeamHelper().getTeamsCount();
         /*System.out.println(before);
         for (i = 0; (before )>=1; before--, i++) {
         //for (i = 0; (before + 1) > 1; before--, i++) {
@@ -19,7 +19,7 @@ public class TeamDeletionTests extends TestBase {
         }
         System.out.println("number deleted  "+i);
         refreshPage();*/
-        int after = app.getTeamsCount();
+        int after = app.getTeamHelper().getTeamsCount();
         System.out.println(after);
 /*if(before==0){
     before=1;
