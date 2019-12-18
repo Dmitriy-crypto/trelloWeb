@@ -10,21 +10,23 @@ public class BoardsDeletionTests extends TestBase {
 
         int i;//count delete boards
 
-        returnToHome();
+        app.returnToHome();
 
-        int a = getNumbersPersonalBoards();
+        int a = app.getNumbersPersonalBoards();
 
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\nNumber boards before removal1: " + getNumbersPersonalBoards());
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\nNumber boards before removal1: " + app.getNumbersPersonalBoards());
 
         //------------delete all boards---------------------------------------------------------------
-        for (i = 0; (a + 1) > 1; a--, i++) {
-            selectFirstPersonalBoard();
-            closeTheBoard();
-            deleteBoard();
+        for (i = 0; (a) + 1 > 1; a--, i++) {
+            //for (i = 0; (a + 1) > 1; a--, i++) {
+            app.selectFirstPersonalBoard();
+            app.closeTheBoard();
+            app.deleteBoard();
+
         }
-        getNumbersPersonalBoards();
-        Assert.assertEquals(getNumbersPersonalBoards(), a);
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" + "Number boards after removal: " + getNumbersPersonalBoards());
+        app.getNumbersPersonalBoards();
+        Assert.assertEquals(app.getNumbersPersonalBoards(), a);
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" + "Number boards after removal: " + app.getNumbersPersonalBoards());
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@\n Deleted Personal Boards = " + i);
     }
 
