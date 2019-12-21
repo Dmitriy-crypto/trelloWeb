@@ -1,6 +1,7 @@
-package com.trello.qa;
+package com.trello.qa.tests;
 //one upload start project
 
+import com.trello.qa.manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

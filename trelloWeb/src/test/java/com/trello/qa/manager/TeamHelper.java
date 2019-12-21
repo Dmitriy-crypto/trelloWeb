@@ -1,4 +1,4 @@
-package com.trello.qa;
+package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,10 @@ public class TeamHelper extends HelperBase {
     //------------------Variables for teams fill----------------------------------------
     public String teamName = "test11 - " + (int) System.currentTimeMillis();
     public String description = "descr Learn_delete_ok";
-    WebDriverWait driverWait;
+    // WebDriverWait driverWait;
+    public String name2Team = "name2";
+    public String desc = "desc";
+
 
     public TeamHelper(WebDriver driver) {
 
@@ -25,6 +28,7 @@ public class TeamHelper extends HelperBase {
 
     //---------------------------------METHODS FOR TEAMS-----------------------------------------------
     public String getTeamNameFromPage() {
+
 
         new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1.u-inline")));
         return driver.findElement(By.cssSelector("h1.u-inline")).getText();
@@ -64,9 +68,28 @@ public class TeamHelper extends HelperBase {
     }
 
     public void clickOnFirstTeam() {
-
+//
         new WebDriverWait(driver, 15).until(elementToBeClickable(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
         click(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li"));
     }
 
+    public void initEditTeamProfile() {
+
+        //click(By.cssSelector(".js-edit-profile"));// option
+        waitForElementAndClick(By.cssSelector(".js-edit-profile"), 10);
+
+    }
+
+    public void changeTeamProfile() {
+
+        typeTextInTheFieldNameBoard(By.xpath("//input[@name='displayName']"), name2Team);
+        typeTextInTheFieldNameBoard(By.xpath("//textarea[@name='desc']"), desc);
+
+    }
+
+    public void confirmEditTeam() {
+
+        click(By.cssSelector(".primary.wide.js-submit-profile"));
+    }
 }
+

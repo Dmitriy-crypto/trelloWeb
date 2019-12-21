@@ -1,26 +1,28 @@
-package com.trello.qa;
+package com.trello.qa.manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-    WebDriver driver;
-    BoardHelper boardHelper;
-    TeamHelper teamHelper;
-    SessionHelper sessionHelper;
     //-------------------Variables-------------------------------------
     public static String url = "https://trello.com/";
     public static String email = "dmitriy.stadnikov@yahoo.com";
     public static String password = "75Dmitriy.2013Eva";
     public String x = "23";
-    boolean no_team = true;//option selection
-    boolean privet_team = true;//option selection not work
-    boolean enable_background_random = true;// enable random background selection
-    int numberBoards = 3;// number of boards to creat
+    public int numberBoards = 3;// number of boards to creat
+    WebDriver driver;
+    BoardHelper boardHelper;
+    TeamHelper teamHelper;
+    SessionHelper sessionHelper;
+    /* boolean no_team = true;//option selection
+     boolean privet_team = true;//option selection not work
+     boolean enable_background_random = true;// enable random background selection*/
     int n; //board selection by position in "public void selectPersonalBoardByNumber"
+
 
     public void init() throws InterruptedException {
 

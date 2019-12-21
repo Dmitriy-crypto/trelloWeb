@@ -1,4 +1,4 @@
-package com.trello.qa;
+package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +7,13 @@ public class BoardHelper extends HelperBase {
 
     //----------------------------Variables for boards fill------------------------------------------------------
     public String x = "23";
-    boolean no_team = true;//option selection
-    boolean privet_team = true;//option selection not work
     //------------------------------------------------------------------------------------------------------------
     public String boardName = "Board off test - " + (int) System.currentTimeMillis();// name board to creat
+    boolean no_team = true;//option selection
+    boolean privet_team = true;//option selection not work
     //else
     int background_selection = 1;// start number underground off board
+    boolean enable_background_random = true;// enable random background selection
 
     public BoardHelper(WebDriver driver) {
 
@@ -192,7 +193,5 @@ public class BoardHelper extends HelperBase {
 
         click(locator);
     }
-
-    boolean enable_background_random = true;// enable random background selection
 
 }

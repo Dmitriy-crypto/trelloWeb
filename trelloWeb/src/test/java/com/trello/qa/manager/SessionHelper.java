@@ -1,4 +1,4 @@
-package com.trello.qa;
+package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -38,5 +38,11 @@ public class SessionHelper extends HelperBase {
     public void openSite(String url) {
 
         driver.navigate().to(url);
+    }
+
+    public void refreshPage() {
+
+        driver.navigate().refresh();
+
     }
 }
