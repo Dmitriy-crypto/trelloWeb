@@ -49,7 +49,7 @@ public class TeamCreationTests extends TestBase {
         // Assert.assertTrue(isUserLoggedIn(By.xpath("//a[@class='button-link tabbed-pane-header-details-edit js-edit-profile']")), "ass");
     }
 
-    @Test
+    @Test(enabled = false)
     public void testCreatBoardFromButtonPlusLeft() throws InterruptedException {
 
         int beforeCountTeams = app.getTeamHelper().getTeamsCount();

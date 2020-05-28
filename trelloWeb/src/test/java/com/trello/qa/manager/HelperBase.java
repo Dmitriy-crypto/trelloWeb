@@ -2,6 +2,7 @@ package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -61,9 +62,16 @@ public class HelperBase {
         click(By.cssSelector("[data-test-id='header-create-menu-button']"));
     }
 
-    public void fillTeamCreationForm(String teamName, String description) {
+    public void fillTeamCreationForm(String teamName, String description) throws InterruptedException {
 
         typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id='header-create-team-name-input']"), teamName);
+        driver.findElement(By.className("css-1yqjdp6")).click();
+        Thread.sleep(2000);
+        //driver.findElement(By.xpath("//div[@class='css-dmzcl._1T1MG_BX1zeaq8']")).click();
+        //driver.findElement(By.className("css-1yqjdp6")).click();
+        driver.findElement(By.xpath("//*[contains(text(),'Sales')]")).click();
+        Thread.sleep(2000);
+
         typeTextInTheFieldNameBoard(By.cssSelector("textarea"), description);
     }
 

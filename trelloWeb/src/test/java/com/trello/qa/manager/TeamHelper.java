@@ -15,7 +15,7 @@ public class TeamHelper extends HelperBase {
     // WebDriverWait driverWait;
     public String name2Team = "name2";
     public String desc = "desc";
-
+    public int after;
 
     public TeamHelper(WebDriver driver) {
 
@@ -34,12 +34,54 @@ public class TeamHelper extends HelperBase {
         return driver.findElement(By.cssSelector("h1.u-inline")).getText();
     }
 
-    public int getTeamsCount() {
+    public int getTeamsCount() throws InterruptedException {
+        if (!teamsNoPresent()) {
+            new WebDriverWait(driver, 10).until(ExpectedConditions.
+                    presenceOfAllElementsLocatedBy(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
+            System.out.println(sizeList(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
+            return sizeList(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li"));
 
+        }
+        System.out.println("no team");
+        return after = 0;
+    }
+
+    public int getTeamsCountDelete() throws InterruptedException {
+        if (teamsNoPresent()) {
+
+            System.out.println("No one team getTeamsCountDelete  return after = 0;");
+            return 0;
+        }
         new WebDriverWait(driver, 10).until(ExpectedConditions.
                 presenceOfAllElementsLocatedBy(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
+        System.out.println("numbers team - " + sizeList(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
         return sizeList(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li"));
     }
+
+    public boolean teamsNoPresent() throws InterruptedException {
+
+        driver.manage().window().maximize();
+        Thread.sleep(1000);
+        try {
+            /*new WebDriverWait(driver, 15).
+                    until(elementToBeClickable(By.className("_33CvMKqfH4Yf0j._3SBHBJq0AAxzqg")));*/
+            new WebDriverWait(driver, 15).
+                    until(elementToBeClickable(By.className("pgEbaAFZBA0N5R")));
+           /* new WebDriverWait(driver, 15).
+                    until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-test-id='home-team-tab-name']")));*/
+            /*new WebDriverWait(driver, 15).
+                    until(ExpectedConditions.elementToBeClickable(By.cssSelector("['data-test-id=\"home-team-tab-name']")));*/
+            //check present web element anchor when there are no teams
+
+            System.out.println("No one team teamsNoPresent");
+            return true;
+        } catch (Exception e) {
+            System.out.println("there are teams");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public void deleteTeam() {
 
@@ -58,18 +100,25 @@ public class TeamHelper extends HelperBase {
 
     public void openSettings() throws InterruptedException {
 
-        new WebDriverWait(driver, 15).
-                until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc")));
-        new WebDriverWait(driver, 15).
-                until(ExpectedConditions.elementToBeClickable(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc")));
+        try {
+            new WebDriverWait(driver, 15).
+                    until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc")));
+            new WebDriverWait(driver, 15).
+                    until(ExpectedConditions.elementToBeClickable(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc")));
+            click(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc"));
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            // after=0;
+            e.printStackTrace();
 
-        click(By.cssSelector(".icon-gear.icon-sm._2aV_KY1gTq1qWc"));
-        Thread.sleep(1000);
+
+        }
     }
 
-    public void clickOnFirstTeam() {
+    public void clickOnFirstTeam() throws InterruptedException {
 //
         new WebDriverWait(driver, 15).until(elementToBeClickable(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li")));
+        Thread.sleep(1000);
         click(By.xpath("//*[@class='NC6qaILF7dGKjb']/../li"));
     }
 

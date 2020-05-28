@@ -24,7 +24,8 @@ public class SessionHelper extends HelperBase {
     public void loginToTrello(String email, String password) throws InterruptedException {
 
         click(By.cssSelector("[href='/login']"));
-        typeTextInTheFieldNameBoard(By.cssSelector("[type=email]"), email);
+        //typeTextInTheFieldNameBoard(By.cssSelector("[type=email]"), email);
+        typeTextInTheFieldNameBoard(By.xpath("//input[@id='user']"), email);
 //        typeTextInTheField(By.cssSelector("[type=password]"), password);
         click(By.id("login"));
         Thread.sleep(3000);
