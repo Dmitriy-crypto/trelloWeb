@@ -37,8 +37,8 @@ public class BoardHelper extends HelperBase {
         selectCreateSomethingFromDropDown(By.cssSelector("[data-test-id='header-create-board-button']"));
         typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id=\"create-board-title-input\"]"), boardName1);
         //----------------board type selection - with or without a team--------------------
-        Thread.sleep(2000);
-        click(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
+        /*Thread.sleep(2000);
+        click(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"*//*button ^ select *//*));
         Thread.sleep(2000);
         if (no_team) {
 
@@ -68,7 +68,7 @@ public class BoardHelper extends HelperBase {
             //clickOnWebElement(By.cssSelector("._3UeOvlU6B5KUnS._2MgouXHqRQDP_5._3ZPeWh5QQj47DA"));
             // class="_3UeOvlU6B5KUnS _2MgouXHqRQDP_5 _3ZPeWh5QQj47DA"
 
-        }
+        }*/
 //-------------------------------background--------------------------------------------------
 
         if (enable_background_random) {
@@ -138,7 +138,9 @@ public class BoardHelper extends HelperBase {
             Thread.sleep(1000);
         }
         //System.out.println("Created " + (x - 1) + " boards.");
+
     }
+
 
     public int getNumbersPersonalBoards() {//number of boards personal all
         return sizeList(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li")) - 1;
@@ -154,6 +156,7 @@ public class BoardHelper extends HelperBase {
         click(By.xpath("//span[@class='icon-lg icon-member']/../../..//ul//li[" + n + "]"));
     }
 
+
     public void fillBoardCreationForm(String boardName, String description) {
 
         typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id='create-board-title-input']"), boardName);
@@ -162,6 +165,7 @@ public class BoardHelper extends HelperBase {
             click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[1]"));//no team
         }
     }
+
 
     public void deleteBoard() throws InterruptedException {
 
@@ -194,4 +198,62 @@ public class BoardHelper extends HelperBase {
         click(locator);
     }
 
+    public void createBoards1(int numberBoards) throws InterruptedException {
+
+
+        for (int x = 1; numberBoards > 0; numberBoards--, x++) {
+
+            clickButtonPlusUp();// button create " + "
+
+            Thread.sleep(1000);
+            String boardName1 = "";
+            boardName1 = "#-" + x + " " + boardName;
+
+            selectCreateSomethingFromDropDown(By.cssSelector("[data-test-id='header-create-board-button']"));
+            typeTextInTheFieldNameBoard(By.cssSelector("[data-test-id=\"create-board-title-input\"]"), boardName1);
+            //----------------board type selection - with or without a team--------------------
+            Thread.sleep(2000);
+            click(By.xpath("//button[@class='W6rMLOx8U0MrPx']//span[@name='down']"/*button ^ select */));
+            Thread.sleep(2000);
+            if (no_team) {
+
+                click(By.xpath("//div[@id='layer-manager-popover']//li[1]//button[1]"));
+            } else
+                click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[2]//button[1]"));
+            Thread.sleep(1000);
+            click(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
+            if (privet_team) {
+                Thread.sleep(1000);
+                click(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
+                //clickOnWebElement(By.cssSelector("//*[@class='_2BQG4yPMt5s_hu _3qi72H5bh1Hw2k _2BsMHO2GghWoia _3CXWmcvfj_w5yC _1Hfz_OCLW086D8']"));
+                Thread.sleep(1000);
+            } else {
+                click(By.xpath("//li[1]//button[1]//span[1]//div[1]"));
+                //clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
+                //clickOnWebElement(By.xpath("//button[@class='_1Lkx3EjS3wCrs7']//span[@name='down']"));
+                Thread.sleep(2000);
+                //clickOnWebElement(By.xpath("//div[@id='layer-manager-popover']//li[2]//button[1]"));
+                //clickOnWebElement(By.xpath("//span[@name='public']"));
+                //clickOnWebElement(By.xpath("//body/div[@id='trello-root']/div[@id='chrome-container']/div[@class='js-react-root']/div[@id='layer-manager-popover']/div[@class='Y34HN84mGuwAaM _1-EJ9-6xaTaAf-']/div[@class='_3n2uNSrVwAmo1u']/nav[@class='_2R1DnMySK1mTDa']/ul/li[2]/button[1]/span[1]"));
+                click(By.cssSelector("//*[@name='public']/."));
+
+                Thread.sleep(2000);
+                //clickOnWebElement(By.xpath("//button[@class='_3UeOvlU6B5KUnS _2MgouXHqRQDP_5 _3ZPeWh5QQj47DA']"));
+                click(By.cssSelector("//*[@class='X6LMWvod566P68']//button[1]"));
+
+            }
+//-------------------------------background--------------------------------------------------
+
+            if (enable_background_random) {
+                background_selection = (int) (Math.random() * 8 + 1);
+            }
+            click(By.xpath("//div[@id='layer-manager-overlay']//li[" + background_selection + "]"));
+            //-------------------------------create board------------------------------------
+            click(By.cssSelector("[data-test-id='create-board-submit-button']"));
+            //-----------------------------------
+            Thread.sleep(1000);
+        }
+        //System.out.println("Created " + (x - 1) + " boards.");
+
+    }
 }

@@ -11,24 +11,24 @@ public class TeamDeletionTests extends TestBase {
 
         int i;//count delete boards
         int before = app.getTeamHelper().getTeamsCountDelete();
-        System.out.println(before+" before For");
+        System.out.println(before+" numbers teams before For");
         if(!(before ==0)){
         for (i = 0; (before) >= 1; before--, i++) {
             //for (i = 0; (before + 1) > 1; before--, i++) {
-            System.out.println(before+" for ");
+            System.out.println(before+"numbers team in For ");
             app.getTeamHelper().clickOnFirstTeam();
             app.getTeamHelper().openSettings();
             app.getTeamHelper().deleteTeam();
         }
-        System.out.println("number deleted  " + i);
+        System.out.println("number teams deleted  " + i);
 
 /*if(before==0){
     before=1;
 }*/}  app.getSessionHelper().refreshPage();
 
         app.getTeamHelper().after = app.getTeamHelper().getTeamsCountDelete();
-        System.out.println(before+" after For");
-        System.out.println("after "+app.getTeamHelper().after);
+        //System.out.println(before+" numbers teams after For");
+        System.out.println("numbers teams after method delete in For"+app.getTeamHelper().after);
 
         Assert.assertEquals(app.getTeamHelper().after, before);
     }

@@ -63,10 +63,10 @@ public class TeamHelper extends HelperBase {
         driver.manage().window().maximize();
         Thread.sleep(1000);
         try {
-            /*new WebDriverWait(driver, 15).
-                    until(elementToBeClickable(By.className("_33CvMKqfH4Yf0j._3SBHBJq0AAxzqg")));*/
             new WebDriverWait(driver, 15).
-                    until(elementToBeClickable(By.className("pgEbaAFZBA0N5R")));
+                    until(elementToBeClickable(By.className("_33CvMKqfH4Yf0j._3SBHBJq0AAxzqg")));
+            /*new WebDriverWait(driver, 15).
+                    until(elementToBeClickable(By.className("pgEbaAFZBA0N5R")));*/
            /* new WebDriverWait(driver, 15).
                     until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-test-id='home-team-tab-name']")));*/
             /*new WebDriverWait(driver, 15).
